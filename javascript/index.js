@@ -1,0 +1,34 @@
+const taskForm = document.querySelector('#task-form');
+const taskInput = document.querySelector('#task-input');
+const taskError = document.querySelector('#task-error');
+const taskList = document.querySelector('#task-list');
+const emptyMessage = document.querySelector('#empty-message');
+
+function clearValidation() {
+    taskError.textContent = '';
+    taskInput.removeAttribute('aria-invalid');
+}
+
+taskForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const taskText = taskInput.value.trim();
+
+    if (taskText.length === 0) {
+        taskError.textContent = 'Vul een taak in voordat je deze toevoegt.';
+        taskInput.setAttribute('aria-invalid', 'true');
+        taskInput.focus();
+        return;
+    }
+
+    const taskItem = document.createElement('li');
+    taskItem.textContent = taskText;
+    taskList.append(taskItem);
+    emptyMessage.hidden = true;
+
+    taskInput.value = '';
+    clearValidation();
+    taskInput.focus();
+});
+
+taskInput.addEventListener('input', clearValidation);
