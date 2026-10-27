@@ -9,12 +9,29 @@
 </head>
 <body>
     <header class="site-header">
-        <p class="brand">StudentBuddy</p>
+        <a class="brand" href="#home">StudentBuddy</a>
         <p>Overzicht in je studentenleven</p>
+        <nav aria-label="Hoofdnavigatie">
+            <ul class="nav-links">
+                <li><a href="#home" aria-current="page">Home</a></li>
+                <li><a href="#studietips">Studietips</a></li>
+                <li><a href="#takenlijst">Takenlijst</a></li>
+                <li><a href="#ontspanning">Ontspanning</a></li>
+            </ul>
+        </nav>
     </header>
     <main>
-        <section class="task-panel" aria-labelledby="task-heading">
-            <h1 id="task-heading">Mijn taken</h1>
+        <section id="home" class="content-panel" aria-labelledby="home-heading">
+            <h1 id="home-heading" tabindex="-1">Welkom bij StudentBuddy</h1>
+            <p>Vind studietips, houd je taken bij en neem tijd voor ontspanning.
+                Kies een onderdeel in het menu om aan de slag te gaan. Je hebt geen account nodig.</p>
+        </section>
+        <section id="studietips" class="content-panel" aria-labelledby="tips-heading">
+            <h1 id="tips-heading" tabindex="-1">Studietips</h1>
+            <p>Verdeel je leerstof in kleine stukken, plan regelmatig een pauze en herhaal wat je hebt geleerd.</p>
+        </section>
+        <section id="takenlijst" class="content-panel" aria-labelledby="task-heading">
+            <h1 id="task-heading" tabindex="-1">Mijn taken</h1>
             <p>Wat wil je nog doen? Voeg je taken hieronder toe.</p>
             <form class="task-form" novalidate>
                 <label for="task-input">Nieuwe taak</label>
@@ -30,6 +47,10 @@
             <p class="empty-message">Je hebt nog geen taken. Voeg je eerste taak toe.</p>
             <ul class="task-list" aria-label="Mijn taken" aria-live="polite" aria-relevant="additions"></ul>
             <p class="storage-note">Je taken worden tijdelijk bewaard en verdwijnen wanneer je deze pagina herlaadt.</p>
+        </section>
+        <section id="ontspanning" class="content-panel" aria-labelledby="relax-heading">
+            <h1 id="relax-heading" tabindex="-1">Ontspanning</h1>
+            <p>Neem even afstand van je studie: maak een wandeling, luister naar muziek of spreek af met vrienden.</p>
         </section>
     </main>
 </body>
