@@ -1,13 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StudentBuddy</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../javascript/index.js" defer></script>
 </head>
 <body>
-    <header> <p>Welkom bij StudentBuddy</p></header>
-    <main></main>
-    <footer></footer>
+    <header class="site-header">
+        <p class="brand">StudentBuddy</p>
+        <p>Overzicht in je studentenleven</p>
+    </header>
+    <main>
+        <section class="task-panel" aria-labelledby="task-heading">
+            <h1 id="task-heading">Mijn taken</h1>
+            <p>Wat wil je nog doen? Voeg je taken hieronder toe.</p>
+            <form class="task-form" novalidate>
+                <label for="task-input">Nieuwe taak</label>
+                <div class="input-row">
+                    <input id="task-input" name="task" type="text"
+                           placeholder="Bijvoorbeeld: hoofdstuk 3 samenvatten"
+                           aria-describedby="task-error" required>
+                    <button type="submit">Taak toevoegen</button>
+                </div>
+                <p id="task-error" class="error" role="alert"></p>
+            </form>
+            <h2>Takenlijst</h2>
+            <p class="empty-message">Je hebt nog geen taken. Voeg je eerste taak toe.</p>
+            <ul class="task-list" aria-label="Mijn taken" aria-live="polite" aria-relevant="additions"></ul>
+            <p class="storage-note">Je taken worden tijdelijk bewaard en verdwijnen wanneer je deze pagina herlaadt.</p>
+        </section>
+    </main>
 </body>
 </html>
