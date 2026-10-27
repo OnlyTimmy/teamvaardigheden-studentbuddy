@@ -1,5 +1,22 @@
+import { studyTips } from './study-tips.js';
+
 const navigationLinks = document.querySelectorAll('.nav-links a');
 const sections = document.querySelectorAll('main > section');
+const studyTipsList = document.querySelector('#study-tips-list');
+
+studyTips.forEach(({ title, explanation }) => {
+    const tip = document.createElement('li');
+    tip.className = 'study-tip';
+
+    const tipTitle = document.createElement('h2');
+    tipTitle.textContent = title;
+
+    const tipExplanation = document.createElement('p');
+    tipExplanation.textContent = explanation;
+
+    tip.append(tipTitle, tipExplanation);
+    studyTipsList.append(tip);
+});
 
 function updateNavigation(moveFocus = false) {
     const requestedSection = window.location.hash.slice(1) || 'home';

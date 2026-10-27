@@ -88,6 +88,34 @@ h2 {
     font-size: 1.25rem;
 }
 
+.study-tips {
+    display: grid;
+    gap: 1rem;
+    padding: 0;
+    margin: 1.5rem 0 0;
+    list-style: none;
+}
+
+.study-tip {
+    padding: 1rem;
+    border: 1px solid #d7e2e7;
+    border-radius: 0.75rem;
+    background: #f2f6f8;
+}
+
+.study-tip h2,
+.study-tip p {
+    margin: 0;
+}
+
+.study-tip h2 {
+    color: #174d53;
+}
+
+.study-tip p {
+    margin-top: 0.5rem;
+}
+
 form {
     margin-top: 1.5rem;
 }
