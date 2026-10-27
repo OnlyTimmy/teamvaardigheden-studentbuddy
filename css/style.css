@@ -114,9 +114,44 @@ input[aria-invalid="true"] {
 }
 
 .task-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
     padding: 0.75rem 0;
     border-bottom: 1px solid #e1e8ec;
     overflow-wrap: anywhere;
+}
+
+.task-checkbox {
+    flex: 0 0 auto;
+    width: 1.15rem;
+    height: 1.15rem;
+    margin: 0;
+    accent-color: #174d53;
+}
+
+.task-text {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.task-item.completed .task-text {
+    color: #50636e;
+    text-decoration: line-through;
+}
+
+.delete-task {
+    flex: 0 0 auto;
+    padding: 0.5rem 0.75rem;
+    background: transparent;
+    color: #174d53;
+}
+
+.delete-task:hover {
+    background: #e8f0f1;
 }
 
 .storage-note {
@@ -128,5 +163,13 @@ input[aria-invalid="true"] {
 @media (max-width: 36rem) {
     .input-row {
         flex-direction: column;
+    }
+
+    .task-list li {
+        align-items: flex-start;
+    }
+
+    .delete-task {
+        padding: 0.5rem;
     }
 }
