@@ -5,16 +5,21 @@
     line-height: 1.5;
 }
 
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
 * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
+    overflow-wrap: anywhere;
 }
 
 .site-header {
-    padding: 1.25rem max(1rem, calc((100% - 48rem) / 2));
+    padding: 1rem max(0.75rem, calc((100% - 48rem) / 2));
     background: #174d53;
     color: #fff;
 }
@@ -24,7 +29,9 @@ body {
 }
 
 .brand {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
     color: inherit;
     font-size: 1.5rem;
     font-weight: 700;
@@ -32,19 +39,27 @@ body {
 }
 
 .nav-links {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.5rem;
     padding: 0;
     margin: 1rem 0 0;
     list-style: none;
 }
 
+.nav-links li {
+    min-width: 0;
+}
+
 .nav-links a {
-    display: block;
-    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.75rem;
+    padding: 0.625rem 0.75rem;
     border-radius: 0.5rem;
     color: #fff;
+    text-align: center;
     text-decoration: none;
 }
 
@@ -63,13 +78,15 @@ body {
 main {
     display: grid;
     gap: 1rem;
+    width: 100%;
     max-width: 50rem;
-    margin: 2rem auto;
-    padding: 0 1rem;
+    margin: 1rem auto;
+    padding: 0 0.75rem;
 }
 
 .content-panel {
-    padding: clamp(1rem, 4vw, 2rem);
+    min-width: 0;
+    padding: clamp(1rem, 5vw, 2rem);
     background: #fff;
     border: 1px solid #d7e2e7;
     border-radius: 1rem;
@@ -81,11 +98,13 @@ main {
 
 h1 {
     margin: 0;
-    font-size: 2rem;
+    font-size: clamp(1.625rem, 8vw, 2rem);
+    line-height: 1.2;
 }
 
 h2 {
     font-size: 1.25rem;
+    line-height: 1.3;
 }
 
 .study-tips {
@@ -128,11 +147,13 @@ label {
 
 .input-row {
     display: flex;
+    flex-direction: column;
     gap: 0.75rem;
 }
 
 input,
 button {
+    max-width: 100%;
     font: inherit;
     border-radius: 0.5rem;
     padding: 0.75rem 1rem;
@@ -140,11 +161,13 @@ button {
 
 input {
     flex: 1;
+    width: 100%;
     min-width: 0;
     border: 1px solid #718590;
 }
 
 button {
+    min-height: 2.75rem;
     border: 1px solid #174d53;
     background: #174d53;
     color: #fff;
@@ -188,12 +211,14 @@ input[aria-invalid="true"] {
 }
 
 .task-list {
-    padding-left: 1.5rem;
+    padding: 0;
+    list-style: none;
 }
 
 .task-list li {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
     gap: 0.75rem;
     padding: 0.75rem 0;
     border-bottom: 1px solid #e1e8ec;
@@ -202,15 +227,18 @@ input[aria-invalid="true"] {
 
 .task-checkbox {
     flex: 0 0 auto;
-    width: 1.15rem;
-    height: 1.15rem;
-    margin: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin: 0.25rem 0 0;
     accent-color: #174d53;
 }
 
 .task-text {
+    display: flex;
+    align-items: center;
     flex: 1;
     min-width: 0;
+    min-height: 2.75rem;
     margin: 0;
     font-weight: 500;
     cursor: pointer;
@@ -222,8 +250,9 @@ input[aria-invalid="true"] {
 }
 
 .delete-task {
-    flex: 0 0 auto;
-    padding: 0.5rem 0.75rem;
+    grid-column: 2;
+    justify-self: start;
+    padding: 0.625rem 0.75rem;
     background: transparent;
     color: #174d53;
 }
@@ -248,6 +277,7 @@ input[aria-invalid="true"] {
 .relaxation-card {
     display: flex;
     flex-direction: column;
+    min-width: 0;
     padding: 1rem;
     border: 2px solid #d7e2e7;
     border-radius: 0.75rem;
@@ -287,6 +317,7 @@ input[aria-invalid="true"] {
 }
 
 .exercise-player {
+    min-width: 0;
     padding: clamp(1rem, 4vw, 1.5rem);
     margin-top: 1.5rem;
     border: 1px solid #b8cbd0;
@@ -295,10 +326,8 @@ input[aria-invalid="true"] {
 }
 
 .exercise-player-heading {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1rem;
+    display: grid;
+    gap: 0.25rem;
 }
 
 .exercise-player-heading h2,
@@ -326,8 +355,9 @@ input[aria-invalid="true"] {
 .exercise-visual {
     display: grid;
     place-items: center;
-    width: 9rem;
-    height: 9rem;
+    width: clamp(7rem, 40vw, 9rem);
+    height: auto;
+    aspect-ratio: 1;
     padding: 1rem;
     border-radius: 50%;
     background: #cce7e4;
@@ -384,8 +414,7 @@ input[aria-invalid="true"] {
 }
 
 .exercise-controls {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
     gap: 0.75rem;
     margin-top: 1.25rem;
 }
@@ -411,30 +440,51 @@ input[aria-invalid="true"] {
     font-size: 0.875rem;
 }
 
-@media (max-width: 36rem) {
+@media (min-width: 36rem) {
     .nav-links {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        display: flex;
+        flex-wrap: wrap;
     }
 
     .input-row {
-        flex-direction: column;
+        flex-direction: row;
     }
 
     .task-list li {
-        align-items: flex-start;
+        display: flex;
+        align-items: center;
     }
 
     .delete-task {
-        padding: 0.5rem;
+        margin-left: auto;
     }
 
     .exercise-player-heading {
-        align-items: flex-end;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
     }
 
     .exercise-controls {
-        display: grid;
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+@media (min-width: 48rem) {
+    .site-header {
+        padding-top: 1.25rem;
+        padding-right: max(1rem, calc((100% - 48rem) / 2));
+        padding-bottom: 1.25rem;
+        padding-left: max(1rem, calc((100% - 48rem) / 2));
+    }
+
+    main {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        padding-right: 1rem;
+        padding-left: 1rem;
     }
 }
 
