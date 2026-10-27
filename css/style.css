@@ -109,11 +109,11 @@ input[aria-invalid="true"] {
     display: none;
 }
 
-#task-list {
+.task-list {
     padding-left: 1.5rem;
 }
 
-#task-list li {
+.task-list li {
     padding: 0.75rem 0;
     border-bottom: 1px solid #e1e8ec;
     overflow-wrap: anywhere;

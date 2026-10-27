@@ -1,8 +1,8 @@
-const taskForm = document.querySelector('#task-form');
+const taskForm = document.querySelector('.task-form');
 const taskInput = document.querySelector('#task-input');
 const taskError = document.querySelector('#task-error');
-const taskList = document.querySelector('#task-list');
-const emptyMessage = document.querySelector('#empty-message');
+const taskList = document.querySelector('.task-list');
+const emptyMessage = document.querySelector('.empty-message');
 
 function clearValidation() {
     taskError.textContent = '';

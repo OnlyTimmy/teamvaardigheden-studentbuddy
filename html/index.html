@@ -16,7 +16,7 @@
         <section class="task-panel" aria-labelledby="task-heading">
             <h1 id="task-heading">Mijn taken</h1>
             <p>Wat wil je nog doen? Voeg je taken hieronder toe.</p>
-            <form id="task-form" novalidate>
+            <form class="task-form" novalidate>
                 <label for="task-input">Nieuwe taak</label>
                 <div class="input-row">
                     <input id="task-input" name="task" type="text"
@@ -27,8 +27,8 @@
                 <p id="task-error" class="error" role="alert"></p>
             </form>
             <h2>Takenlijst</h2>
-            <p id="empty-message">Je hebt nog geen taken. Voeg je eerste taak toe.</p>
-            <ul id="task-list" aria-label="Mijn taken" aria-live="polite" aria-relevant="additions"></ul>
+            <p class="empty-message">Je hebt nog geen taken. Voeg je eerste taak toe.</p>
+            <ul class="task-list" aria-label="Mijn taken" aria-live="polite" aria-relevant="additions"></ul>
             <p class="storage-note">Je taken worden tijdelijk bewaard en verdwijnen wanneer je deze pagina herlaadt.</p>
         </section>
     </main>
