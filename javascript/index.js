@@ -1,39 +1,8 @@
-const navigationLinks = document.querySelectorAll('.nav-links a');
-const sections = document.querySelectorAll('main > section');
-
-function updateNavigation(moveFocus = false) {
-    const requestedSection = window.location.hash.slice(1) || 'home';
-    const activeSection = Array.from(sections).find((section) => section.id === requestedSection)
-        || document.querySelector('#home');
-
-    sections.forEach((section) => {
-        section.hidden = section !== activeSection;
-    });
-
-    navigationLinks.forEach((link) => {
-        if (link.hash === `#${activeSection.id}`) {
-            link.setAttribute('aria-current', 'page');
-        } else {
-            link.removeAttribute('aria-current');
-        }
-    });
-
-    const activeLink = Array.from(navigationLinks).find((link) => link.hash === `#${activeSection.id}`);
-    document.title = `${activeLink.textContent} | StudentBuddy`;
-
-    if (moveFocus) {
-        activeSection.querySelector('h1').focus();
-    }
-}
-
-window.addEventListener('hashchange', () => updateNavigation(true));
-updateNavigation();
-
-const taskForm = document.querySelector('#task-form');
+const taskForm = document.querySelector('.task-form');
 const taskInput = document.querySelector('#task-input');
 const taskError = document.querySelector('#task-error');
-const taskList = document.querySelector('#task-list');
-const emptyMessage = document.querySelector('#empty-message');
+const taskList = document.querySelector('.task-list');
+const emptyMessage = document.querySelector('.empty-message');
 
 function clearValidation() {
     taskError.textContent = '';

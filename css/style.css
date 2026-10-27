@@ -24,59 +24,21 @@ body {
 }
 
 .brand {
-    display: inline-block;
-    color: inherit;
     font-size: 1.5rem;
     font-weight: 700;
-    text-decoration: none;
-}
-
-.nav-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    padding: 0;
-    margin: 1rem 0 0;
-    list-style: none;
-}
-
-.nav-links a {
-    display: block;
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
-    color: #fff;
-    text-decoration: none;
-}
-
-.nav-links a:hover {
-    background: #103c41;
-}
-
-.nav-links a[aria-current="page"] {
-    background: #fff;
-    color: #174d53;
-    font-weight: 700;
-    text-decoration: underline;
-    text-underline-offset: 0.25rem;
 }
 
 main {
-    display: grid;
-    gap: 1rem;
     max-width: 50rem;
     margin: 2rem auto;
     padding: 0 1rem;
 }
 
-.content-panel {
+.task-panel {
     padding: clamp(1rem, 4vw, 2rem);
     background: #fff;
     border: 1px solid #d7e2e7;
     border-radius: 1rem;
-}
-
-[hidden] {
-    display: none;
 }
 
 h1 {
@@ -129,15 +91,9 @@ button:hover {
 }
 
 input:focus-visible,
-button:focus-visible,
-a:focus-visible,
-h1:focus-visible {
+button:focus-visible {
     outline: 3px solid #217cba;
     outline-offset: 3px;
-}
-
-.site-header a:focus-visible {
-    outline-color: #fff;
 }
 
 input[aria-invalid="true"] {
@@ -153,11 +109,11 @@ input[aria-invalid="true"] {
     display: none;
 }
 
-#task-list {
+.task-list {
     padding-left: 1.5rem;
 }
 
-#task-list li {
+.task-list li {
     padding: 0.75rem 0;
     border-bottom: 1px solid #e1e8ec;
     overflow-wrap: anywhere;
@@ -170,11 +126,6 @@ input[aria-invalid="true"] {
 }
 
 @media (max-width: 36rem) {
-    .nav-links {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
     .input-row {
         flex-direction: column;
     }
