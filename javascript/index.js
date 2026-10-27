@@ -1,4 +1,5 @@
 import { studyTips } from './study-tips.js';
+import { relaxationExercises } from './relaxation-exercises.js';
 
 const navigationLinks = document.querySelectorAll('.nav-links a');
 const sections = document.querySelectorAll('main > section');
@@ -128,3 +129,144 @@ taskList.addEventListener('click', (event) => {
 });
 
 taskInput.addEventListener('input', clearValidation);
+
+const exercisePlayer = document.querySelector('#exercise-player');
+const exerciseTitle = document.querySelector('#exercise-title');
+const exerciseDescription = document.querySelector('#exercise-description');
+const exerciseTimer = document.querySelector('#exercise-timer');
+const exerciseInstruction = document.querySelector('#exercise-instruction');
+const exerciseVisual = document.querySelector('#exercise-visual');
+const exerciseVisualLabel = document.querySelector('#exercise-visual-label');
+const exerciseProgress = document.querySelector('#exercise-progress');
+const exerciseProgressBar = exerciseProgress.querySelector('span');
+const exerciseStatus = document.querySelector('.exercise-status');
+const stopExerciseButton = document.querySelector('#stop-exercise');
+const restartExerciseButton = document.querySelector('#restart-exercise');
+const startExerciseButtons = document.querySelectorAll('[data-start-exercise]');
+let activeExercise = null;
+let exerciseTimerId = null;
+let exerciseStartedAt = 0;
+let activePhaseIndex = -1;
+
+function getExerciseDuration(exercise) {
+    return exercise.phases.reduce((total, phase) => total + phase.duration, 0);
+}
+
+function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+}
+
+function setSelectedExercise(exerciseId) {
+    document.querySelectorAll('[data-exercise-card]').forEach((card) => {
+        card.classList.toggle('is-selected', card.dataset.exerciseCard === exerciseId);
+    });
+}
+
+function showExercisePhase(phase, phaseIndex) {
+    if (phaseIndex === activePhaseIndex) {
+        return;
+    }
+
+    activePhaseIndex = phaseIndex;
+    exerciseInstruction.textContent = phase.instruction;
+    exerciseVisualLabel.textContent = phase.label;
+    exerciseVisual.dataset.state = phase.visualState;
+    exerciseVisual.style.setProperty('--phase-duration', `${phase.duration}s`);
+}
+
+function finishExercise() {
+    window.clearInterval(exerciseTimerId);
+    exerciseTimerId = null;
+    exerciseStatus.textContent = 'Oefening voltooid';
+    exerciseTimer.textContent = '0:00';
+    exerciseInstruction.textContent = 'Goed gedaan. Neem dit rustige gevoel mee naar je volgende taak.';
+    exerciseVisualLabel.textContent = 'Klaar!';
+    exerciseVisual.dataset.state = 'complete';
+    exerciseProgress.setAttribute('aria-valuenow', '100');
+    exerciseProgressBar.style.width = '100%';
+    stopExerciseButton.disabled = true;
+}
+
+function updateExercise() {
+    const totalDuration = getExerciseDuration(activeExercise);
+    const elapsed = Math.floor((Date.now() - exerciseStartedAt) / 1000);
+
+    if (elapsed >= totalDuration) {
+        finishExercise();
+        return;
+    }
+
+    let phaseStart = 0;
+    const phaseIndex = activeExercise.phases.findIndex((phase) => {
+        if (elapsed < phaseStart + phase.duration) {
+            return true;
+        }
+        phaseStart += phase.duration;
+        return false;
+    });
+
+    showExercisePhase(activeExercise.phases[phaseIndex], phaseIndex);
+
+    const remaining = totalDuration - elapsed;
+    const progress = Math.round((elapsed / totalDuration) * 100);
+    exerciseTimer.textContent = formatTime(remaining);
+    exerciseProgress.setAttribute('aria-valuenow', progress.toString());
+    exerciseProgressBar.style.width = `${progress}%`;
+}
+
+function startExercise(exerciseId, moveFocus = true) {
+    const selectedExercise = relaxationExercises.find((exercise) => exercise.id === exerciseId);
+    if (!selectedExercise) {
+        return;
+    }
+
+    window.clearInterval(exerciseTimerId);
+    activeExercise = selectedExercise;
+    exerciseStartedAt = Date.now();
+    activePhaseIndex = -1;
+
+    exercisePlayer.hidden = false;
+    exerciseTitle.textContent = activeExercise.title;
+    exerciseDescription.textContent = activeExercise.description;
+    exerciseStatus.textContent = 'Oefening bezig';
+    exerciseVisual.className = `exercise-visual exercise-visual--${activeExercise.id}`;
+    exerciseProgress.setAttribute('aria-valuenow', '0');
+    exerciseProgressBar.style.width = '0%';
+    stopExerciseButton.disabled = false;
+    setSelectedExercise(activeExercise.id);
+    updateExercise();
+    exerciseTimerId = window.setInterval(updateExercise, 250);
+
+    if (moveFocus) {
+        exercisePlayer.focus();
+    }
+}
+
+function stopExercise() {
+    if (!exerciseTimerId) {
+        return;
+    }
+
+    window.clearInterval(exerciseTimerId);
+    exerciseTimerId = null;
+    exerciseStatus.textContent = 'Oefening beëindigd';
+    exerciseInstruction.textContent = 'Je hebt de oefening beëindigd. Start opnieuw of kies een andere oefening.';
+    exerciseVisualLabel.textContent = 'Gestopt';
+    exerciseVisual.dataset.state = 'stopped';
+    stopExerciseButton.disabled = true;
+}
+
+startExerciseButtons.forEach((button) => {
+    button.addEventListener('click', () => startExercise(button.dataset.startExercise));
+});
+
+stopExerciseButton.addEventListener('click', stopExercise);
+restartExerciseButton.addEventListener('click', () => startExercise(activeExercise.id, false));
+
+window.addEventListener('hashchange', () => {
+    if (window.location.hash !== '#ontspanning') {
+        stopExercise();
+    }
+});
