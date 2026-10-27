@@ -156,6 +156,12 @@ button:hover {
     background: #103c41;
 }
 
+button:disabled {
+    border-color: #8a9a9f;
+    background: #8a9a9f;
+    cursor: not-allowed;
+}
+
 input:focus-visible,
 button:focus-visible,
 a:focus-visible,
@@ -232,6 +238,179 @@ input[aria-invalid="true"] {
     font-size: 0.875rem;
 }
 
+.relaxation-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.relaxation-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    border: 2px solid #d7e2e7;
+    border-radius: 0.75rem;
+    background: #f2f6f8;
+}
+
+.relaxation-card.is-selected {
+    border-color: #217cba;
+    box-shadow: 0 0 0 2px rgb(33 124 186 / 15%);
+}
+
+.relaxation-card h2,
+.relaxation-card p {
+    margin: 0;
+}
+
+.relaxation-card h2 {
+    color: #174d53;
+}
+
+.relaxation-card p:not(.exercise-meta) {
+    margin: 0.5rem 0 1rem;
+}
+
+.relaxation-card button {
+    width: 100%;
+    margin-top: auto;
+}
+
+.exercise-meta,
+.exercise-status {
+    color: #50636e;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.exercise-player {
+    padding: clamp(1rem, 4vw, 1.5rem);
+    margin-top: 1.5rem;
+    border: 1px solid #b8cbd0;
+    border-radius: 0.75rem;
+    background: #f8fbfb;
+}
+
+.exercise-player-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.exercise-player-heading h2,
+.exercise-player-heading p,
+.exercise-player > p {
+    margin: 0;
+}
+
+.exercise-timer {
+    flex: 0 0 auto;
+    color: #174d53;
+    font-size: 1.5rem;
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+}
+
+.exercise-stage {
+    display: grid;
+    justify-items: center;
+    gap: 1rem;
+    padding: 1.5rem 0;
+    text-align: center;
+}
+
+.exercise-visual {
+    display: grid;
+    place-items: center;
+    width: 9rem;
+    height: 9rem;
+    padding: 1rem;
+    border-radius: 50%;
+    background: #cce7e4;
+    color: #174d53;
+    font-weight: 700;
+    text-align: center;
+    transition: transform var(--phase-duration, 1s) ease-in-out, background-color 300ms ease;
+}
+
+.exercise-visual--breathing {
+    transform: scale(0.72);
+}
+
+.exercise-visual--breathing[data-state="inhale"],
+.exercise-visual--breathing[data-state="hold"] {
+    transform: scale(1);
+}
+
+.exercise-visual--breathing[data-state="exhale"] {
+    transform: scale(0.72);
+}
+
+.exercise-visual[data-state="complete"] {
+    background: #cce8d3;
+    transform: scale(0.85);
+}
+
+.exercise-visual[data-state="stopped"] {
+    background: #e1e8ec;
+    transform: scale(0.85);
+}
+
+.exercise-instruction {
+    max-width: 32rem;
+    min-height: 3rem;
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.exercise-progress {
+    height: 0.65rem;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #d7e2e7;
+}
+
+.exercise-progress span {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: #217cba;
+    transition: width 250ms linear;
+}
+
+.exercise-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+}
+
+.secondary-button {
+    background: transparent;
+    color: #174d53;
+}
+
+.secondary-button:hover {
+    background: #e8f0f1;
+}
+
+.secondary-button:disabled {
+    border-color: #8a9a9f;
+    background: transparent;
+    color: #718590;
+}
+
+.exercise-note {
+    margin-top: 1rem !important;
+    color: #50636e;
+    font-size: 0.875rem;
+}
+
 @media (max-width: 36rem) {
     .nav-links {
         display: grid;
@@ -248,5 +427,20 @@ input[aria-invalid="true"] {
 
     .delete-task {
         padding: 0.5rem;
+    }
+
+    .exercise-player-heading {
+        align-items: flex-end;
+    }
+
+    .exercise-controls {
+        display: grid;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .exercise-visual,
+    .exercise-progress span {
+        transition-duration: 1ms;
     }
 }

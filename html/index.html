@@ -51,7 +51,53 @@
         </section>
         <section id="ontspanning" class="content-panel" aria-labelledby="relax-heading">
             <h1 id="relax-heading" tabindex="-1">Ontspanning</h1>
-            <p>Neem even afstand van je studie: maak een wandeling, luister naar muziek of spreek af met vrienden.</p>
+            <p>Kies een korte oefening om spanning los te laten en met hernieuwde focus verder te gaan.</p>
+            <div class="relaxation-options" aria-label="Beschikbare ontspanningsoefeningen">
+                <article class="relaxation-card" data-exercise-card="breathing">
+                    <p class="exercise-meta">36 seconden</p>
+                    <h2>Rustig ademen</h2>
+                    <p>Volg het ritme van de cirkel en vertraag bewust je ademhaling.</p>
+                    <button type="button" data-start-exercise="breathing">Start ademhaling</button>
+                </article>
+                <article class="relaxation-card" data-exercise-card="pause">
+                    <p class="exercise-meta">1 minuut</p>
+                    <h2>Frisse blik</h2>
+                    <p>Neem afstand van je scherm en ontspan je ogen en schouders.</p>
+                    <button type="button" data-start-exercise="pause">Start korte pauze</button>
+                </article>
+                <article class="relaxation-card" data-exercise-card="stretch">
+                    <p class="exercise-meta">1 minuut</p>
+                    <h2>Studie-stretch</h2>
+                    <p>Maak je nek, schouders en polsen los met rustige bewegingen.</p>
+                    <button type="button" data-start-exercise="stretch">Start stretch</button>
+                </article>
+            </div>
+
+            <section id="exercise-player" class="exercise-player" aria-labelledby="exercise-title" tabindex="-1" hidden>
+                <div class="exercise-player-heading">
+                    <div>
+                        <p class="exercise-status">Oefening bezig</p>
+                        <h2 id="exercise-title"></h2>
+                    </div>
+                    <p id="exercise-timer" class="exercise-timer" role="timer" aria-label="Resterende tijd"></p>
+                </div>
+                <p id="exercise-description"></p>
+                <div class="exercise-stage">
+                    <div id="exercise-visual" class="exercise-visual" aria-hidden="true">
+                        <span id="exercise-visual-label"></span>
+                    </div>
+                    <p id="exercise-instruction" class="exercise-instruction" aria-live="polite" aria-atomic="true"></p>
+                </div>
+                <div id="exercise-progress" class="exercise-progress" role="progressbar"
+                     aria-label="Voortgang van de oefening" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                    <span></span>
+                </div>
+                <div class="exercise-controls">
+                    <button type="button" id="stop-exercise" class="secondary-button">Beëindigen</button>
+                    <button type="button" id="restart-exercise">Opnieuw starten</button>
+                </div>
+                <p class="exercise-note">Beweeg rustig en blijf binnen je eigen grenzen.</p>
+            </section>
         </section>
     </main>
 </body>
